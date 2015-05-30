@@ -38,10 +38,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'localflavor',
+    'rest_framework',
 )
 
 PROJECT_APPS = (
     'accounts',
+    'api',
 )
 
 INSTALLED_APPS += PROJECT_APPS
