@@ -14,6 +14,7 @@ from rest_framework.authtoken.models import Token
 from oauth2client.client import OAuth2WebServerFlow, FlowExchangeError
 
 from accounts.models import Customer, CredentialsModel
+from api.permissions import IsCreatorOrReadOnly
 from api.serializers import CustomerSerializer
 
 
@@ -55,6 +56,6 @@ class AuthAPIView(APIView):
 
 
 class CustomerViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, IsCreatorOrReadOnly)
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer

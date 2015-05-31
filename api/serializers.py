@@ -9,3 +9,7 @@ class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = ('id', 'first_name', 'last_name', 'iban', 'photo', 'email')
+
+    def save(self, **kwargs):
+        kwargs['creator'] = self.context['request'].user
+        return super(CustomerSerializer, self).save(**kwargs)

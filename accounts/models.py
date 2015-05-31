@@ -9,7 +9,7 @@ class Customer(User):
     iban = lf_models.IBANField()
     photo = models.ImageField(upload_to='media/accounts/picture/%Y/%m/%d',
                               null=True)
-    creator = models.ForeignKey('self', null=True)
+    creator = models.ForeignKey(User, null=True, related_name='creators')
 
     class Meta:
         verbose_name = 'customer'
