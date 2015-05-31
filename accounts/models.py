@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User
 from localflavor.generic import models as lf_models
+from oauth2client.django_orm import CredentialsField
 
 
 class Customer(User):
@@ -16,5 +17,10 @@ class Customer(User):
 
     def save(self, *args, **kwargs):
         if not self.username:
-            self.username = uuid.uuid4()
+            self.username = str(uuid.uuid4())
         super(Customer, self).save(*args, **kwargs)
+
+
+class CredentialsModel(models.Model):
+    user = models.OneToOneField(User)
+    credential = CredentialsField()

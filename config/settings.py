@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ORIGIN_WHITELIST = (
+    'localhost:9000',
+)
 
 # Application definition
 
@@ -38,7 +41,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'localflavor',
+    'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
 )
 
 PROJECT_APPS = (
@@ -50,6 +55,7 @@ INSTALLED_APPS += PROJECT_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -113,6 +119,18 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# https://console.developers.google.com/ to create app
+GOOGLE_OAUTH2_ID = ''
+GOOGLE_OAUTH2_SECRET = ''
+GOOGLE_OAUTH2_SCOPE = 'email'
+GOOGLE_OAUTH2_REDIRECT_URI = ''
+
+# we allow only token auth
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 
 try:
     from config.local_settings import *
