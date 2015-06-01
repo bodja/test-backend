@@ -132,6 +132,8 @@ REST_FRAMEWORK = {
     ),
 }
 
+THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
+
 try:
     from config.local_settings import *
 except ImportError:
